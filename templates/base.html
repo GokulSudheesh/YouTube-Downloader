@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube-Downloader</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/base.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class = "header">
+    <img src="../static/YT.png" width="50rem" height="auto">
+    <h2>YouTube Downloader</h2>
+  </div>
+  {% block body %}{% endblock %}
+</body>
+</html>

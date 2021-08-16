@@ -1,0 +1,10 @@
+{% extends "base.html"%}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
+{% endblock %}
+{% block body %}
+<form action="/show" method="POST">
+  <input type="text", name="url" id = "url" placeholder="Paste the link to the YouTube video here. (https://youtu.be/dQw4w9WgXcQ)" required><br>
+  <input class="btn" type="submit", value="Go">
+</form>
+{% endblock %}

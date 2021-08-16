@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/show.css') }}">
+<script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+{% endblock %}
+{% block body %}
+<div class="container">
+        <div id="result">
+            <img src="{{ result.image_path }}" width="300" height="auto"><br>
+            <div id="des1">
+                <i class="fas fa-eye fa-lg"></i>
+                <p id="view">{{ result.views }}</p>
+            </div>
+            <div id="des2">
+                <i class="fas fa-clock fa-lg"></i>
+                <p id="time">{{ result.duration }}</p>
+            </div>
+        </div>
+        <br><br>
+        <p id="title">{{ "Title: "+result.title }}</p><br><br>
+        <form id = "form" action="/download" method="POST">
+            <input type="radio" id="mp3" name="format" value="mp3" required>
+            <label for="mp3">Audio</label>
+            <input type="radio" id="mp4" name="format" value="mp4" required>
+            <label for="mp4">Video</label><br>
+            <input class="btn btn-margin" type="submit", value="Download">
+        </form>
+        <!-- <div class="loader"></div> -->
+        <p id="RickRoll">{{ result.text }}</p>
+        <a href="{{ url_for('index') }}">Go Back</a>
+</div>
+{% endblock %}
