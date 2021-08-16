@@ -1,4 +1,4 @@
-# YouTube-Thumbnails
+# YouTube-Downloader
 <img src="GitHubimages/ss1.JPG" width="480px">
 <img src="GitHubimages/ss2.JPG" width="480px">
 <img src="GitHubimages/ss3.JPG" width="480px">
