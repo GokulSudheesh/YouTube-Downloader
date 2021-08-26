@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file
 import thumbnail
 from thumbnail import Thumbnail
-from youtube import Youtube
+import youtube as ytbe
 import os
+import json
 
 app = Flask(__name__)
-ytbe = None
 
 @app.route('/')
 def index():
@@ -13,44 +13,45 @@ def index():
 
 @app.route('/show', methods=['POST'])
 def show():
-    global ytbe
     try:
-        url = request.form['url']
+        url = request.form['url'].strip(" ")
         #print(url)
-        ytbe = Youtube(url.strip(" "))
-        thumb = Thumbnail(url.strip(" "), ytbe.filename)
-        title =  ytbe.title
+        meta = ytbe.meta(url)
+        thumb = Thumbnail(url, meta["filename"])
 
         # Get the thumbnail of the video
         thumb.get_thumbnail()
-        image_path = os.path.join("thumbnails", ytbe.filename+".jpg")
+        image_path = os.path.join("thumbnails", meta["filename"]+".jpg")
         text = ""
         if (thumbnail.check_rickroll(image_path)>0.60): #RickRollCheck if SSIM is more than 60%
             text = "Its a Rick Roll! Proceed at your own risk."
         result = {
-            "image_path" : thumb.image_link,
-            "title" : title,
-            "text" : text,
-            "duration" : ytbe.duration,
-            "views" : str(ytbe.views)
+            "download": {"url": url, "filename": meta["filename"]},
+            "image_path": thumb.image_link,
+            "title": meta["title"],
+            "text": text,
+            "duration": meta["duration"],
+            "views": str(meta["views"])
         }
         return render_template("show.html", result = result)
-    except:
+    except Exception as e:
+        print(e)
         return render_template("failure.html")
 
 @app.route('/download', methods=['POST'])
 def download():
     try:
         format = request.form['format']
-        file = None
+        download = eval(request.form['Download'])
+        url = download['url']
+        filename = download['filename']
         if (format == "mp3"):
-            ytbe.download_audio()
-            file = os.path.join("audio", ytbe.filename+".mp3")
+            file = ytbe.download_audio(url, filename)
         elif (format == "mp4"):
-            ytbe.download_video()
-            file = os.path.join("video", ytbe.filename+".mp4")
+            file = ytbe.download_video(url, filename)
         return send_file(file, as_attachment=True)
-    except:
+    except Exception as e:
+        print(e)
         return render_template("failure.html")
 
 @app.route('/failure', methods=['POST'])
