@@ -1,0 +1,8 @@
+<%- include("partials/header") -%>
+<link rel="stylesheet" href="css/index.css">
+<%- include("partials/body") -%>
+    <form action="/show" method="POST">
+        <input type="text", name="url" id = "url" placeholder="Paste the link to the YouTube video here. (https://youtu.be/dQw4w9WgXcQ)" required><br>
+        <input class="btn" type="submit", value="Go">
+    </form>
+<%- include("partials/footer") -%>
