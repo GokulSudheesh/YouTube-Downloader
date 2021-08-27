@@ -5,7 +5,7 @@
 
 ### Setting up
 ```
-git clone https://github.com/GokulSudheesh/Youtube-Downloader.git
+git clone --branch node --single-branch https://github.com/GokulSudheesh/Youtube-Downloader.git
 cd Youtube-Downloader
 npm i
 ```
