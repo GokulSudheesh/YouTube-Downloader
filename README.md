@@ -3,8 +3,9 @@
 <img src="GitHubimages/ss2.JPG" width="480px">
 <img src="GitHubimages/ss3.JPG" width="480px">
 
-### Requirements
-The `requirements.txt` file contains all the dependencies needed for the project.
+### Setting up
 ```
-pip install -r requirements.txt
+git clone https://github.com/GokulSudheesh/Youtube-Downloader.git
+cd Youtube-Downloader
+npm i
 ```
